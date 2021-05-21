@@ -46,6 +46,9 @@
   ;; Bitmanip
   UNSPEC_PCNTW
 
+  ;; Crypto extension unspecs.
+  UNSPEC_CRYPTO
+
   ;; Stack tie
   UNSPEC_TIE
 ])
@@ -1558,7 +1561,7 @@
 
 (define_insn "fence"
   [(unspec_volatile [(const_int 0)] UNSPECV_FENCE)]
-  ""
+  "TARGET_ZIFENCEI"
   "%|fence%-")
 
 (define_insn "fence_i"
@@ -2519,6 +2522,8 @@
   [(set_attr "length" "0")]
 )
 (include "bitmanip.md")
+
+(include "crypto.md")
 
 ;; This fixes a failure with gcc.c-torture/execute/pr64242.c at -O2 for a
 ;; 32-bit target when using -mtune=sifive-7-series.  The first sched pass

@@ -68,6 +68,26 @@ riscv_implied_info_t riscv_implied_info[] =
   {"b", "zbf"},
   {"b", "zbc"},
   {"b", "zbm"},
+  {"b", "zbr"},
+  {"b", "zbt"},
+  {"k", "zbb"},
+  {"k", "zbc"},
+  {"k", "zbp"},
+  {"k", "zbe"},
+  {"k", "zkn"},
+  {"k", "zkr"},
+  {"zkb", "zbb"},
+  {"zkb", "zbc"},
+  {"zkb", "zbp"},
+  {"zkn", "zkne"},
+  {"zkn", "zknd"},
+  {"zkn", "zknh"},
+  {"zkn", "zkg"},
+  {"zkn", "zkb"},
+  {"zks", "zksed"},
+  {"zks", "zksh"},
+  {"zks", "zkg"},
+  {"zks", "zkb"},
   {NULL, NULL}
 };
 
@@ -119,17 +139,30 @@ static const struct riscv_ext_version riscv_ext_version_table[] =
   {"zifencei", ISA_SPEC_CLASS_20191213, 2, 0},
   {"zifencei", ISA_SPEC_CLASS_20190608, 2, 0},
 
-  {"b",   ISA_SPEC_CLASS_NONE, 0, 92},
-  {"zba", ISA_SPEC_CLASS_NONE, 0, 92},
-  {"zbb", ISA_SPEC_CLASS_NONE, 0, 92},
-  {"zbc", ISA_SPEC_CLASS_NONE, 0, 92},
-  {"zbe", ISA_SPEC_CLASS_NONE, 0, 92},
-  {"zbf", ISA_SPEC_CLASS_NONE, 0, 92},
-  {"zbr", ISA_SPEC_CLASS_NONE, 0, 92},
-  {"zbm", ISA_SPEC_CLASS_NONE, 0, 92},
-  {"zbs", ISA_SPEC_CLASS_NONE, 0, 92},
-  {"zbt", ISA_SPEC_CLASS_NONE, 0, 92},
-  {"zbp", ISA_SPEC_CLASS_NONE, 0, 92},
+  {"b",   ISA_SPEC_CLASS_NONE, 0, 93},
+  {"zba", ISA_SPEC_CLASS_NONE, 0, 93},
+  {"zbb", ISA_SPEC_CLASS_NONE, 0, 93},
+  {"zbc", ISA_SPEC_CLASS_NONE, 0, 93},
+  {"zbe", ISA_SPEC_CLASS_NONE, 0, 93},
+  {"zbf", ISA_SPEC_CLASS_NONE, 0, 93},
+  {"zbr", ISA_SPEC_CLASS_NONE, 0, 93},
+  {"zbm", ISA_SPEC_CLASS_NONE, 0, 93},
+  {"zbs", ISA_SPEC_CLASS_NONE, 0, 93},
+  {"zbt", ISA_SPEC_CLASS_NONE, 0, 93},
+  {"zbp", ISA_SPEC_CLASS_NONE, 0, 93},
+  
+  {"k",    ISA_SPEC_CLASS_NONE, 0, 90},
+  {"zkb",  ISA_SPEC_CLASS_NONE, 0, 90},
+  {"zkg",  ISA_SPEC_CLASS_NONE, 0, 90},
+  {"zkn",  ISA_SPEC_CLASS_NONE, 0, 90},
+  {"zkne", ISA_SPEC_CLASS_NONE, 0, 90},
+  {"zknd", ISA_SPEC_CLASS_NONE, 0, 90},
+  {"zknh", ISA_SPEC_CLASS_NONE, 0, 90},
+  {"zkr",  ISA_SPEC_CLASS_NONE, 0, 90},
+  {"zks",  ISA_SPEC_CLASS_NONE, 0, 90},
+  {"zksed",ISA_SPEC_CLASS_NONE, 0, 90},
+  {"zksh", ISA_SPEC_CLASS_NONE, 0, 90},
+
   /* Terminate the list.  */
   {NULL, ISA_SPEC_CLASS_NONE, 0, 0}
 };
@@ -561,7 +594,7 @@ riscv_subset_list::lookup (const char *subset, int major_version,
 static const char *
 riscv_supported_std_ext (void)
 {
-  return "mafdqlcbjtpvn";
+  return "mafdqlcbjktpvn";
 }
 
 /* Parsing subset version.
@@ -991,6 +1024,19 @@ static const riscv_ext_flag_table_t riscv_ext_flag_table[] =
   {"zbc", &gcc_options::x_riscv_bitmanip_subext, MASK_ZBC},
   {"zbm", &gcc_options::x_riscv_bitmanip_subext, MASK_ZBM},
   {"zbt", &gcc_options::x_riscv_bitmanip_subext, MASK_ZBT},
+
+  {"zicsr",    &gcc_options::x_riscv_zi_subext, MASK_ZICSR},
+  {"zifencei", &gcc_options::x_riscv_zi_subext, MASK_ZIFENCEI},
+
+  {"zkg", &gcc_options::x_riscv_crypto_subext, MASK_ZKG},
+  {"zkb", &gcc_options::x_riscv_crypto_subext, MASK_ZKB},
+  {"zkr", &gcc_options::x_riscv_crypto_subext, MASK_ZKR},
+  {"zkne", &gcc_options::x_riscv_crypto_subext, MASK_ZKNE},
+  {"zknd", &gcc_options::x_riscv_crypto_subext, MASK_ZKND},
+  {"zknh", &gcc_options::x_riscv_crypto_subext, MASK_ZKNH},
+  {"zksed", &gcc_options::x_riscv_crypto_subext, MASK_ZKSED},
+  {"zksh", &gcc_options::x_riscv_crypto_subext, MASK_ZKSH},
+
   {NULL, NULL, 0}
 };
 

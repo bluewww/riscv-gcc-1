@@ -61,16 +61,31 @@ enum riscv_align_data {
   riscv_align_data_type_natural
 };
 
-#define MASK_ZBA (1 << 0)
-#define MASK_ZBB (1 << 1)
-#define MASK_ZBS (1 << 2)
-#define MASK_ZBP (1 << 3)
-#define MASK_ZBE (1 << 4)
-#define MASK_ZBF (1 << 5)
-#define MASK_ZBC (1 << 6)
-#define MASK_ZBR (1 << 7)
-#define MASK_ZBM (1 << 8)
-#define MASK_ZBT (1 << 9)
+#define MASK_ZICSR    (1 << 0)
+#define MASK_ZIFENCEI (1 << 1)
+// Bitmanip
+#define MASK_ZBA (1 << 2)
+#define MASK_ZBB (1 << 3)
+#define MASK_ZBS (1 << 4)
+#define MASK_ZBP (1 << 5)
+#define MASK_ZBE (1 << 6)
+#define MASK_ZBF (1 << 7)
+#define MASK_ZBC (1 << 8)
+#define MASK_ZBR (1 << 9)
+#define MASK_ZBM (1 << 10)
+#define MASK_ZBT (1 << 11)
+// Scalar Crypto
+#define MASK_ZKG (1 << 12)
+#define MASK_ZKB (1 << 13)
+#define MASK_ZKR (1 << 14)
+#define MASK_ZKNE (1 << 15)
+#define MASK_ZKND (1 << 16)
+#define MASK_ZKNH (1 << 17)
+#define MASK_ZKSED (1 << 18)
+#define MASK_ZKSH (1 << 19)
+
+#define TARGET_ZICSR    ((riscv_zi_subext & MASK_ZICSR) != 0)
+#define TARGET_ZIFENCEI ((riscv_zi_subext & MASK_ZIFENCEI) != 0)
 
 #define TARGET_ZBA ((riscv_bitmanip_subext & MASK_ZBA) != 0)
 #define TARGET_ZBB ((riscv_bitmanip_subext & MASK_ZBB) != 0)
@@ -83,10 +98,12 @@ enum riscv_align_data {
 #define TARGET_ZBM ((riscv_bitmanip_subext & MASK_ZBM) != 0)
 #define TARGET_ZBT ((riscv_bitmanip_subext & MASK_ZBT) != 0)
 
-#define MASK_ZICSR    (1 << 0)
-#define MASK_ZIFENCEI (1 << 1)
-
-#define TARGET_ZICSR    ((riscv_zi_subext & MASK_ZICSR) != 0)
-#define TARGET_ZIFENCEI ((riscv_zi_subext & MASK_ZIFENCEI) != 0)
+#define TARGET_ZKB ((riscv_crypto_subext & MASK_ZKB) != 0)
+#define TARGET_ZKR ((riscv_crypto_subext & MASK_ZKR) != 0)
+#define TARGET_ZKNE ((riscv_crypto_subext & MASK_ZKNE) != 0)
+#define TARGET_ZKND ((riscv_crypto_subext & MASK_ZKND) != 0)
+#define TARGET_ZKNH ((riscv_crypto_subext & MASK_ZKNH) != 0)
+#define TARGET_ZKSED ((riscv_crypto_subext & MASK_ZKSED) != 0)
+#define TARGET_ZKSH ((riscv_crypto_subext & MASK_ZKSH) != 0)
 
 #endif /* ! GCC_RISCV_OPTS_H */
